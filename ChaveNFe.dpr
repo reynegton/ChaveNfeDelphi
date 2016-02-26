@@ -8,6 +8,7 @@ uses
 
 begin
   Application.Initialize;
+  Application.Title := 'Chave de Acesso NFe';
   Application.CreateForm(TFChaveNfe, FChaveNfe);
   Application.Run;
 end.
