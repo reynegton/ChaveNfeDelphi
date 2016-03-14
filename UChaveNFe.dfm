@@ -12,7 +12,11 @@ object FChaveNfe: TFChaveNfe
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
+  FormStyle = fsMDIChild
   OldCreateOrder = False
+  Position = poScreenCenter
+  Visible = True
+  OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
