@@ -42,17 +42,18 @@ type
     DsDados: TDataSource;
     CDSDadosChaveNFe: TStringField;
     DBCBxUfs: TDBComboBoxValues;
-    procedure EdtChaveNfeKeyPress(Sender: TObject; var Key: Char);
     procedure BtnQuebraChaveClick(Sender: TObject);
     procedure BtnCalcDVClick(Sender: TObject);
     procedure BtnGeraChaveNFeClick(Sender: TObject);
     procedure SomenteNumeros(Sender:TObject;var Key:Char);
     procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    constructor OnCreate(sender: Tobject);
   private
 
   private
 
-  function CalcularDv(Numero: String): String;
+
 
     { Private declarations }
   public
@@ -64,20 +65,16 @@ var
 
 implementation
 
-{$R *.dfm}
+uses UPrincipal, UFunctions;
 
-procedure TFChaveNfe.EdtChaveNfeKeyPress(Sender: TObject; var Key: Char);
-begin
-  If not( key in['0'..'9',#08] ) then
-    key:=#0;
-end;
+{$R *.dfm}
 
 procedure TFChaveNfe.BtnQuebraChaveClick(Sender: TObject);
   var ChaveNfe:String;
 begin
 
   ChaveNfe := CDSDadosChaveNfe.AsString;
-  if (Length(ChaveNfe) <> 44) or (ChaveNfe[44] <> CalcularDv(Copy(ChaveNfe,0,43))) then
+  if (Length(ChaveNfe) <> 44) or (ChaveNfe[44] <> CalcMod11(Copy(ChaveNfe,0,43))) then
   begin
     ShowMessage('Chave de Acesso invalida');
     exit;
@@ -110,7 +107,7 @@ begin
   end;
   if not (CDSDados.State in [dsinsert,dsedit]) then
     CDSDados.Edit;
-  CDSDadosChaveNfe.AsString := CDSDadosChaveNfe.AsString + CalcularDv(CDSDadosChaveNfe.AsString);
+  CDSDadosChaveNfe.AsString := CDSDadosChaveNfe.AsString + CalcMod11(CDSDadosChaveNfe.AsString);
 end;
 
 procedure TFChaveNfe.BtnGeraChaveNFeClick(Sender: TObject);
@@ -124,14 +121,14 @@ begin
   end;
 
   chave := CDSDadosCodEstado.AsString + CDSDadosAnoMes.AsString + CDSDadosCNPJ.AsString + CDSDadosModeloNFe.AsString + CDSDadosSerieNFe.AsString + CDSDadosNumeroNFe.AsString + CDSDadosCodNFe.AsString;
-  DV := CalcularDv (chave);
+  DV := CalcMod11 (chave);
   if not (CDSDados.State in [dsinsert,dsedit]) then
     CDSDados.Edit;
   if CDSDadosDV.AsString <> '' then
   begin
     if CDSDadosDV.AsString <> DV then
     begin
-      if messagedlg('DV Informado invalido, deseja recalcular',mtCustom,[mbYes,mbNo], 0) = mrYes then
+      if messagedlg('DV Informado invalido, deseja recalcular ?',mtCustom,[mbYes,mbNo], 0) = mrYes then
         CDSDadosDV.AsString := DV
       else
         exit;
@@ -144,34 +141,27 @@ end;
 
 procedure TFChaveNfe.SomenteNumeros(Sender: TObject; var Key: Char);
 begin
-  If not( key in['0'..'9',#08] ) then
-  key:=#0;
+  SomenteNumerosKeyPress(Key);
 end;
 
-function TFChaveNfe.CalcularDv(Numero: String): String;
-var i,j,k : Integer;
-  Soma : Integer;
-  Digito : Integer;
-begin
-  Result := '';
-
-  Soma := 0; k:= 2;
-  for i := Length(Numero) downto 1 do
-  begin
-    Soma := Soma + (StrToInt(Numero[i])*k);
-    inc(k);
-    if k > 9 then k := 2;
-  end;
-  Digito := 11 - Soma mod 11;
-  if Digito >= 10 then
-    Digito := 0;
-  Result := Result + Chr(Digito + Ord('0'));
-end;
 
 procedure TFChaveNfe.FormShow(Sender: TObject);
 begin
   if not (CDSDados.Active and (CDSDados.State in [dsinsert,dsedit])) then
     CDSDados.Append;
+end;
+
+procedure TFChaveNfe.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  TFPrincipal(owner).FChaveNfe := nil;
+  TFPrincipal(owner).FChaveNfe.Free;
+  self.Release;
+end;
+
+constructor TFChaveNfe.OnCreate(sender: Tobject);
+var a :String;
+begin
+  a := 'teste';
 end;
 
 end.
