@@ -17,6 +17,7 @@ object FChaveNfe: TFChaveNfe
   Position = poScreenCenter
   Visible = True
   OnClose = FormClose
+  OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -59,8 +60,8 @@ object FChaveNfe: TFChaveNfe
       Height = 21
       DataField = 'ChaveNFe'
       DataSource = DsDados
+      MaxLength = 44
       TabOrder = 0
-      OnKeyPress = SomenteNumeros
     end
   end
   object Panel2: TPanel
@@ -135,83 +136,6 @@ object FChaveNfe: TFChaveNfe
       TabOrder = 7
       OnClick = BtnGeraChaveNFeClick
     end
-    object EdtDV: TDBEdit
-      Left = 496
-      Top = 98
-      Width = 121
-      Height = 21
-      DataField = 'DV'
-      DataSource = DsDados
-      MaxLength = 1
-      TabOrder = 6
-      OnKeyPress = SomenteNumeros
-    end
-    object EdtCodNfe: TDBEdit
-      Left = 326
-      Top = 98
-      Width = 121
-      Height = 21
-      DataField = 'CodNFe'
-      DataSource = DsDados
-      MaxLength = 9
-      TabOrder = 5
-      OnKeyPress = SomenteNumeros
-    end
-    object EdtNumDocto: TDBEdit
-      Left = 174
-      Top = 98
-      Width = 121
-      Height = 21
-      DataField = 'NumeroNFe'
-      DataSource = DsDados
-      MaxLength = 9
-      TabOrder = 4
-      OnKeyPress = SomenteNumeros
-    end
-    object EdtSerieNfe: TDBEdit
-      Left = 8
-      Top = 98
-      Width = 121
-      Height = 21
-      DataField = 'SerieNFe'
-      DataSource = DsDados
-      MaxLength = 3
-      TabOrder = 3
-      OnKeyPress = SomenteNumeros
-    end
-    object EdtModDocto: TDBEdit
-      Left = 496
-      Top = 35
-      Width = 121
-      Height = 21
-      DataField = 'ModeloNFe'
-      DataSource = DsDados
-      MaxLength = 2
-      TabOrder = 2
-      OnKeyPress = SomenteNumeros
-    end
-    object EdtCNPJ: TDBEdit
-      Left = 326
-      Top = 35
-      Width = 121
-      Height = 21
-      DataField = 'CNPJ'
-      DataSource = DsDados
-      MaxLength = 14
-      TabOrder = 1
-      OnKeyPress = SomenteNumeros
-    end
-    object EdtMesAno: TDBEdit
-      Left = 174
-      Top = 35
-      Width = 121
-      Height = 21
-      DataField = 'AnoMes'
-      DataSource = DsDados
-      MaxLength = 4
-      TabOrder = 0
-      OnKeyPress = SomenteNumeros
-    end
     object DBCBxUfs: TDBComboBoxValues
       Left = 8
       Top = 35
@@ -285,6 +209,79 @@ object FChaveNfe: TFChaveNfe
         '53')
       ParentFont = False
       TabOrder = 8
+    end
+    object EdtDV: TDBEdit
+      Left = 496
+      Top = 98
+      Width = 121
+      Height = 21
+      DataField = 'DV'
+      DataSource = DsDados
+      MaxLength = 1
+      TabOrder = 6
+    end
+    object EdtCodNfe: TDBEdit
+      Left = 326
+      Top = 98
+      Width = 121
+      Height = 21
+      DataField = 'CodNFe'
+      DataSource = DsDados
+      MaxLength = 9
+      TabOrder = 5
+      OnExit = EdtCodNfeExit
+    end
+    object EdtNumDocto: TDBEdit
+      Left = 174
+      Top = 98
+      Width = 121
+      Height = 21
+      DataField = 'NumeroNFe'
+      DataSource = DsDados
+      MaxLength = 9
+      TabOrder = 4
+      OnExit = EdtNumDoctoExit
+    end
+    object EdtSerieNfe: TDBEdit
+      Left = 8
+      Top = 98
+      Width = 121
+      Height = 21
+      DataField = 'SerieNFe'
+      DataSource = DsDados
+      MaxLength = 3
+      TabOrder = 3
+      OnExit = EdtSerieNfeExit
+    end
+    object EdtModDocto: TDBEdit
+      Left = 496
+      Top = 35
+      Width = 121
+      Height = 21
+      DataField = 'ModeloNFe'
+      DataSource = DsDados
+      MaxLength = 2
+      TabOrder = 2
+    end
+    object EdtCNPJ: TDBEdit
+      Left = 326
+      Top = 35
+      Width = 121
+      Height = 21
+      DataField = 'CNPJ'
+      DataSource = DsDados
+      MaxLength = 14
+      TabOrder = 1
+    end
+    object EdtMesAno: TDBEdit
+      Left = 174
+      Top = 35
+      Width = 121
+      Height = 21
+      DataField = 'AnoMes'
+      DataSource = DsDados
+      MaxLength = 4
+      TabOrder = 0
     end
   end
   object CDSDados: TClientDataSet

@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, ExtCtrls, DB, DBClient, Mask, DBCtrls, AtkDA;
+  Dialogs, StdCtrls, Buttons, ExtCtrls, DB, DBClient, Mask, DBCtrls, AtkDA,
+  rxToolEdit, rxCurrEdit, CellEditors;
 
 type
   TFChaveNfe = class(TForm)
@@ -31,6 +32,9 @@ type
     CDSDadosNumeroNFe: TStringField;
     CDSDadosCodNFe: TStringField;
     CDSDadosDV: TStringField;
+    DsDados: TDataSource;
+    CDSDadosChaveNFe: TStringField;
+    DBCBxUfs: TDBComboBoxValues;
     EdtChaveNfe: TDBEdit;
     EdtDV: TDBEdit;
     EdtCodNfe: TDBEdit;
@@ -39,18 +43,17 @@ type
     EdtModDocto: TDBEdit;
     EdtCNPJ: TDBEdit;
     EdtMesAno: TDBEdit;
-    DsDados: TDataSource;
-    CDSDadosChaveNFe: TStringField;
-    DBCBxUfs: TDBComboBoxValues;
     procedure BtnQuebraChaveClick(Sender: TObject);
     procedure BtnCalcDVClick(Sender: TObject);
     procedure BtnGeraChaveNFeClick(Sender: TObject);
-    procedure SomenteNumeros(Sender:TObject;var Key:Char);
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    constructor OnCreate(sender: Tobject);
+    procedure EdtSerieNfeExit(Sender: TObject);
+    procedure EdtNumDoctoExit(Sender: TObject);
+    procedure EdtCodNfeExit(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
-
+    procedure SetEditNumbers(HEdit: THandle);
   private
 
 
@@ -110,6 +113,8 @@ begin
   CDSDadosChaveNfe.AsString := CDSDadosChaveNfe.AsString + CalcMod11(CDSDadosChaveNfe.AsString);
 end;
 
+
+
 procedure TFChaveNfe.BtnGeraChaveNFeClick(Sender: TObject);
   var DV: String;
   chave:String;
@@ -139,10 +144,7 @@ begin
   CDSDadosChaveNfe.AsString :=  chave + DV;
 end;
 
-procedure TFChaveNfe.SomenteNumeros(Sender: TObject; var Key: Char);
-begin
-  SomenteNumerosKeyPress(Key);
-end;
+
 
 
 procedure TFChaveNfe.FormShow(Sender: TObject);
@@ -158,10 +160,38 @@ begin
   self.Release;
 end;
 
-constructor TFChaveNfe.OnCreate(sender: Tobject);
-var a :String;
+procedure TFChaveNfe.EdtSerieNfeExit(Sender: TObject);
 begin
-  a := 'teste';
+  CDSDadosSerieNFe.AsString := FormatFloat('000', CDSDadosSerieNFe.AsFloat);
+end;
+
+procedure TFChaveNfe.EdtNumDoctoExit(Sender: TObject);
+begin
+  CDSDadosNumeroNFe.AsString := FormatFloat('000000000', CDSDadosNumeroNFe.AsFloat);
+end;
+
+procedure TFChaveNfe.EdtCodNfeExit(Sender: TObject);
+begin
+  CDSDadosCodNFe.AsString := FormatFloat('000000000',CDSDadosCodNFe.AsFloat);
+end;
+
+procedure TFChaveNfe.SetEditNumbers(HEdit: THandle);
+var fstyle: DWord;
+begin
+  fstyle :=  GetWindowLong(HEdit,GWL_STYLE);
+  SetWindowLong(HEdit, GWL_STYLE, fstyle or ES_NUMBER);
+end;
+
+procedure TFChaveNfe.FormCreate(Sender: TObject);
+begin
+  SetEditNumbers(EdtChaveNfe.Handle);
+  SetEditNumbers(EdtMesAno.Handle);
+  SetEditNumbers(EdtCNPJ.Handle);
+  SetEditNumbers(EdtModDocto.Handle);
+  SetEditNumbers(EdtSerieNfe.Handle);
+  SetEditNumbers(EdtNumDocto.Handle);
+  SetEditNumbers(EdtCodNfe.Handle);
+  SetEditNumbers(EdtDV.Handle);
 end;
 
 end.
