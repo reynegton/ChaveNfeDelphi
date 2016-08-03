@@ -1,9 +1,10 @@
 unit UFunctions;
 
 interface
-uses SysUtils;
+uses SysUtils,Windows;
   function CalcMod11(Numero: String): String;
   procedure SomenteNumerosKeyPress(var Key: Char);
+  procedure SetEditNumbers(HEdit: THandle);
 implementation
 
 function CalcMod11(Numero: String): String;
@@ -25,6 +26,14 @@ begin
     Digito := 0;
   Result := Result + Chr(Digito + Ord('0'));
 end;
+
+procedure SetEditNumbers(HEdit: THandle);
+var fstyle: DWord;
+begin
+  fstyle :=  GetWindowLong(HEdit,GWL_STYLE);
+  SetWindowLong(HEdit, GWL_STYLE, fstyle or ES_NUMBER);
+end;
+
 
 procedure SomenteNumerosKeyPress(var Key: Char);
 begin

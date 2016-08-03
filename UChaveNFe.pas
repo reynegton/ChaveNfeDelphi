@@ -53,7 +53,7 @@ type
     procedure EdtCodNfeExit(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
-    procedure SetEditNumbers(HEdit: THandle);
+   // procedure SetEditNumbers(HEdit: THandle);
   private
 
 
@@ -175,12 +175,12 @@ begin
   CDSDadosCodNFe.AsString := FormatFloat('000000000',CDSDadosCodNFe.AsFloat);
 end;
 
-procedure TFChaveNfe.SetEditNumbers(HEdit: THandle);
+{procedure TFChaveNfe.SetEditNumbers(HEdit: THandle);
 var fstyle: DWord;
 begin
   fstyle :=  GetWindowLong(HEdit,GWL_STYLE);
   SetWindowLong(HEdit, GWL_STYLE, fstyle or ES_NUMBER);
-end;
+end;}
 
 procedure TFChaveNfe.FormCreate(Sender: TObject);
 begin

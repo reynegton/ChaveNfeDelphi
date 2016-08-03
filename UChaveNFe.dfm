@@ -60,7 +60,6 @@ object FChaveNfe: TFChaveNfe
       Height = 21
       DataField = 'ChaveNFe'
       DataSource = DsDados
-      MaxLength = 44
       TabOrder = 0
     end
   end
