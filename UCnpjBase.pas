@@ -30,7 +30,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn1Click(Sender: TObject);
     procedure BtnGeraChaveNFeClick(Sender: TObject);
-    procedure SomenteNumeros(Sender: TObject; var Key: Char);
+    procedure FormCreate(Sender: TObject);
   private
 
     { Private declarations }
@@ -67,11 +67,6 @@ begin
   TFPrincipal(owner).FCNPJBase := nil;
   TFPrincipal(owner).FCNPJBase.Free;
   self.Release;
-end;
-
-procedure TFCnpjBase.SomenteNumeros(Sender: TObject; var Key: Char);
-begin
-  SomenteNumerosKeyPress(Key);
 end;
 
 procedure TFCnpjBase.BitBtn1Click(Sender: TObject);
@@ -130,6 +125,14 @@ begin
   end;
 
   CDSCNPJCNPJ.AsString := CDSCNPJCNPJ_Base.AsString+CDSCNPJCNPJ_Filial.AsString+CDSCNPJCNPJ_DV.AsString;
+end;
+
+procedure TFCnpjBase.FormCreate(Sender: TObject);
+begin
+  SetEditNumbers(DBEdit1.Handle);
+  SetEditNumbers(DBEdit2.Handle);
+  SetEditNumbers(DBEdit3.Handle);
+  SetEditNumbers(DBEdit4.Handle);
 end;
 
 end.
