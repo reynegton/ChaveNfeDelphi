@@ -17,6 +17,7 @@ object FCnpjBase: TFCnpjBase
   Position = poScreenCenter
   Visible = True
   OnClose = FormClose
+  OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -42,7 +43,6 @@ object FCnpjBase: TFCnpjBase
       DataField = 'CNPJ'
       DataSource = DSCNPJ
       TabOrder = 0
-      OnKeyPress = SomenteNumeros
     end
     object BitBtn1: TBitBtn
       Left = 146
@@ -90,7 +90,6 @@ object FCnpjBase: TFCnpjBase
       DataField = 'CNPJ_Base'
       DataSource = DSCNPJ
       TabOrder = 0
-      OnKeyPress = SomenteNumeros
     end
     object DBEdit3: TDBEdit
       Left = 152
@@ -100,7 +99,6 @@ object FCnpjBase: TFCnpjBase
       DataField = 'CNPJ_Filial'
       DataSource = DSCNPJ
       TabOrder = 1
-      OnKeyPress = SomenteNumeros
     end
     object DBEdit4: TDBEdit
       Left = 300
@@ -110,7 +108,6 @@ object FCnpjBase: TFCnpjBase
       DataField = 'CNPJ_DV'
       DataSource = DSCNPJ
       TabOrder = 2
-      OnKeyPress = SomenteNumeros
     end
     object BtnGeraChaveNFe: TBitBtn
       Left = 8

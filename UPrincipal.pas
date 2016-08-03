@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Menus,UChaveNFe,UCnpjBase;
+  Dialogs, Menus,UChaveNFe,UCnpjBase,midaslib;
 
 type
   TFPrincipal = class(TForm)
