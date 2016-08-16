@@ -5,7 +5,7 @@ object FChaveNfe: TFChaveNfe
   BorderStyle = bsSingle
   Caption = 'Chave de Acesso NFe'
   ClientHeight = 223
-  ClientWidth = 652
+  ClientWidth = 667
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -24,7 +24,7 @@ object FChaveNfe: TFChaveNfe
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 652
+    Width = 667
     Height = 57
     Align = alTop
     TabOrder = 0
@@ -66,54 +66,54 @@ object FChaveNfe: TFChaveNfe
   object Panel2: TPanel
     Left = 0
     Top = 57
-    Width = 652
+    Width = 667
     Height = 166
     Align = alClient
     TabOrder = 1
     object Label9: TLabel
-      Left = 496
+      Left = 481
       Top = 79
       Width = 15
       Height = 13
       Caption = 'DV'
     end
     object Label8: TLabel
-      Left = 326
+      Left = 306
       Top = 79
       Width = 159
       Height = 13
       Caption = 'Codigo NFe (gerado pelo sistema)'
     end
     object Label7: TLabel
-      Left = 174
+      Left = 8
       Top = 79
       Width = 60
       Height = 13
       Caption = 'Numero NFe'
     end
     object Label6: TLabel
-      Left = 8
-      Top = 79
+      Left = 576
+      Top = 17
       Width = 47
       Height = 13
       Caption = 'Serie NFe'
     end
     object Label5: TLabel
-      Left = 496
+      Left = 481
       Top = 17
       Width = 58
       Height = 13
       Caption = 'Modelo NFe'
     end
     object Label4: TLabel
-      Left = 326
+      Left = 306
       Top = 17
       Width = 71
       Height = 13
       Caption = 'CNPJ Emitente'
     end
     object Label3: TLabel
-      Left = 174
+      Left = 156
       Top = 17
       Width = 128
       Height = 13
@@ -125,6 +125,13 @@ object FChaveNfe: TFChaveNfe
       Width = 69
       Height = 13
       Caption = 'Codigo Estado'
+    end
+    object Label10: TLabel
+      Left = 156
+      Top = 81
+      Width = 72
+      Height = 13
+      Caption = 'Tipo Impressao'
     end
     object BtnGeraChaveNFe: TBitBtn
       Left = 8
@@ -210,7 +217,7 @@ object FChaveNfe: TFChaveNfe
       TabOrder = 8
     end
     object EdtDV: TDBEdit
-      Left = 496
+      Left = 481
       Top = 98
       Width = 121
       Height = 21
@@ -220,7 +227,7 @@ object FChaveNfe: TFChaveNfe
       TabOrder = 6
     end
     object EdtCodNfe: TDBEdit
-      Left = 326
+      Left = 306
       Top = 98
       Width = 121
       Height = 21
@@ -231,7 +238,7 @@ object FChaveNfe: TFChaveNfe
       OnExit = EdtCodNfeExit
     end
     object EdtNumDocto: TDBEdit
-      Left = 174
+      Left = 8
       Top = 98
       Width = 121
       Height = 21
@@ -242,9 +249,9 @@ object FChaveNfe: TFChaveNfe
       OnExit = EdtNumDoctoExit
     end
     object EdtSerieNfe: TDBEdit
-      Left = 8
-      Top = 98
-      Width = 121
+      Left = 576
+      Top = 35
+      Width = 60
       Height = 21
       DataField = 'SerieNFe'
       DataSource = DsDados
@@ -253,9 +260,9 @@ object FChaveNfe: TFChaveNfe
       OnExit = EdtSerieNfeExit
     end
     object EdtModDocto: TDBEdit
-      Left = 496
+      Left = 481
       Top = 35
-      Width = 121
+      Width = 64
       Height = 21
       DataField = 'ModeloNFe'
       DataSource = DsDados
@@ -263,7 +270,7 @@ object FChaveNfe: TFChaveNfe
       TabOrder = 2
     end
     object EdtCNPJ: TDBEdit
-      Left = 326
+      Left = 306
       Top = 35
       Width = 121
       Height = 21
@@ -273,7 +280,7 @@ object FChaveNfe: TFChaveNfe
       TabOrder = 1
     end
     object EdtMesAno: TDBEdit
-      Left = 174
+      Left = 156
       Top = 35
       Width = 121
       Height = 21
@@ -281,6 +288,17 @@ object FChaveNfe: TFChaveNfe
       DataSource = DsDados
       MaxLength = 4
       TabOrder = 0
+    end
+    object DBeTpImp: TDBEdit
+      Left = 156
+      Top = 99
+      Width = 64
+      Height = 21
+      DataField = 'TPIMP'
+      DataSource = DsDados
+      MaxLength = 2
+      TabOrder = 9
+      OnExit = DBeTpImpExit
     end
   end
   object CDSDados: TClientDataSet
@@ -290,7 +308,7 @@ object FChaveNfe: TFChaveNfe
     Left = 464
     Top = 177
     Data = {
-      140100009619E0BD010000001800000009000000000003000000140109436F64
+      2E0100009619E0BD01000000180000000A0000000000030000002E0109436F64
       45737461646F010049000000010005574944544802000200140006416E6F4D65
       73010049000000010005574944544802000200140004434E504A010049000000
       0100055749445448020002001400094D6F64656C6F4E46650100490000000100
@@ -298,7 +316,8 @@ object FChaveNfe: TFChaveNfe
       445448020002001400094E756D65726F4E466501004900000001000557494454
       4802000200140006436F644E4665010049000000010005574944544802000200
       140002445601004900000001000557494454480200020014000843686176654E
-      46650100490000000100055749445448020002002C000000}
+      46650100490000000100055749445448020002002C00055450494D5001004900
+      000001000557494454480200020002000000}
     object CDSDadosCodEstado: TStringField
       FieldName = 'CodEstado'
     end
@@ -326,6 +345,10 @@ object FChaveNfe: TFChaveNfe
     object CDSDadosChaveNFe: TStringField
       FieldName = 'ChaveNFe'
       Size = 44
+    end
+    object CDSDadosTPIMP: TStringField
+      FieldName = 'TPIMP'
+      Size = 2
     end
   end
   object DsDados: TDataSource

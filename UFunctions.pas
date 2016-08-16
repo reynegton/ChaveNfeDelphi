@@ -1,10 +1,11 @@
 unit UFunctions;
 
 interface
-uses SysUtils,Windows;
+uses SysUtils,Windows,classes,IdHashMessageDigest, IdHash;
   function CalcMod11(Numero: String): String;
   procedure SomenteNumerosKeyPress(var Key: Char);
   procedure SetEditNumbers(HEdit: THandle);
+  function GetMD5File(const fileName : string) : string;
 implementation
 
 function CalcMod11(Numero: String): String;
@@ -39,6 +40,22 @@ procedure SomenteNumerosKeyPress(var Key: Char);
 begin
   If not( key in['0'..'9',#08] ) then
     key:=#0;
+end;
+
+function GetMD5File(const fileName : string) : string;
+var
+  idmd5 : TIdHashMessageDigest5;
+  fs : TFileStream;
+  hash : T4x4LongWordRecord;
+begin
+  idmd5 := TIdHashMessageDigest5.Create;
+  fs := TFileStream.Create(fileName, fmOpenRead OR fmShareDenyWrite) ;
+  try
+    result := idmd5.AsHex(idmd5.HashValue(fs)) ;
+  finally
+    fs.Free;
+    idmd5.Free;
+  end;
 end;
 
 end.

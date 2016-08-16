@@ -134,6 +134,9 @@ OriginalFilename=
 ProductName=
 ProductVersion=1.0.0.0
 Comments=
+[Excluded Packages]
+P:\v103_d70.bpl=TurboPower VisualPlanIt 1.03 designtime package - VCL70
+p:\dclrxdb70.bpl=RX Library Database Components
 [HistoryLists\hlUnitAliases]
 Count=1
 Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
