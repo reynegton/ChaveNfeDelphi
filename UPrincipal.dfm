@@ -33,5 +33,12 @@ object FPrincipal: TFPrincipal
         OnClick = CNPJBase1Click
       end
     end
+    object Diversos1: TMenuItem
+      Caption = 'Diversos'
+      object CalculodeMD51: TMenuItem
+        Caption = 'Calculo de MD5'
+        OnClick = CalculodeMD51Click
+      end
+    end
   end
 end

@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Menus,UChaveNFe,UCnpjBase,midaslib;
+  Dialogs, Menus,UChaveNFe,UCnpjBase,UCalcMD5,midaslib;
 
 type
   TFPrincipal = class(TForm)
@@ -13,15 +13,19 @@ type
     ChavedeAcesso1: TMenuItem;
     CNPJ1: TMenuItem;
     CNPJBase1: TMenuItem;
+    Diversos1: TMenuItem;
+    CalculodeMD51: TMenuItem;
     procedure ChavedeAcesso1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure CNPJBase1Click(Sender: TObject);
+    procedure CalculodeMD51Click(Sender: TObject);
   private
 
     { Private declarations }
   public
     FChaveNfe : TFChaveNfe;
     FCNPJBase : TFCnpjBase;
+    FCalcMD5  : TFCalcMD5;
     { Public declarations }
   end;
 
@@ -68,6 +72,22 @@ procedure TFPrincipal.FormCreate(Sender: TObject);
 begin
   FChaveNfe := nil;
   FCnpjBase := nil;
+  FCalcMD5  := nil;
+end;
+
+procedure TFPrincipal.CalculodeMD51Click(Sender: TObject);
+begin
+  if not (assigned(FCalcMD5)) then
+  begin
+    FCalcMD5 := TFCalcMD5.Create(self);
+    FCalcMD5.Show;
+  end
+  else
+  begin
+    FCalcMD5.WindowState := wsnormal ;
+    FCalcMD5.Position := poScreenCenter;
+    FCalcMD5.Visible := true;
+  end;
 end;
 
 end.

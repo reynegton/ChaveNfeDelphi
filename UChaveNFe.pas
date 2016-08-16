@@ -43,6 +43,9 @@ type
     EdtModDocto: TDBEdit;
     EdtCNPJ: TDBEdit;
     EdtMesAno: TDBEdit;
+    CDSDadosTPIMP: TStringField;
+    DBeTpImp: TDBEdit;
+    Label10: TLabel;
     procedure BtnQuebraChaveClick(Sender: TObject);
     procedure BtnCalcDVClick(Sender: TObject);
     procedure BtnGeraChaveNFeClick(Sender: TObject);
@@ -52,6 +55,7 @@ type
     procedure EdtNumDoctoExit(Sender: TObject);
     procedure EdtCodNfeExit(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure DBeTpImpExit(Sender: TObject);
   private
    // procedure SetEditNumbers(HEdit: THandle);
   private
@@ -92,7 +96,8 @@ begin
   CDSDadosModeloNFe.AsString := Copy(ChaveNfe,21,2);
   CDSDadosSerieNFe.AsString  := Copy(ChaveNfe,23,3);
   CDSDadosNumeroNFe.AsString := Copy(ChaveNfe,26,9);
-  CDSDadosCodNFe.AsString    := Copy(ChaveNfe,35,9);
+  CDSDadosTPIMP.AsString     := Copy(ChaveNfe,35,1);
+  CDSDadosCodNFe.AsString    := Copy(ChaveNfe,36,8);
   CDSDadosDV.AsString        := Copy(ChaveNfe,44,1);
 end;
 
@@ -120,12 +125,12 @@ procedure TFChaveNfe.BtnGeraChaveNFeClick(Sender: TObject);
   chave:String;
 begin
   if (CDSDadosCodEstado.AsString = '') or (CDSDadosAnoMes.AsString = '') or (CDSDadosCNPJ.AsString = '') or  (CDSDadosModeloNFe.AsString = '') or (CDSDadosSerieNFe.AsString = '') or
-     (CDSDadosNumeroNFe.AsString = '') or (CDSDadosCodNFe.AsString = '') then
+     (CDSDadosNumeroNFe.AsString = '') or (CDSDadosCodNFe.AsString = '') or (CDSDadosTPIMP.AsString = '') then
   begin
     ShowMessage('É necessario informar os campos acima antes, o unico que pode ficar vazio é o DV');
   end;
 
-  chave := CDSDadosCodEstado.AsString + CDSDadosAnoMes.AsString + CDSDadosCNPJ.AsString + CDSDadosModeloNFe.AsString + CDSDadosSerieNFe.AsString + CDSDadosNumeroNFe.AsString + CDSDadosCodNFe.AsString;
+  chave := CDSDadosCodEstado.AsString + CDSDadosAnoMes.AsString + CDSDadosCNPJ.AsString + CDSDadosModeloNFe.AsString + CDSDadosSerieNFe.AsString + CDSDadosNumeroNFe.AsString +CDSDadosTPIMP.AsString+ CDSDadosCodNFe.AsString;
   DV := CalcMod11 (chave);
   if not (CDSDados.State in [dsinsert,dsedit]) then
     CDSDados.Edit;
@@ -192,6 +197,12 @@ begin
   SetEditNumbers(EdtNumDocto.Handle);
   SetEditNumbers(EdtCodNfe.Handle);
   SetEditNumbers(EdtDV.Handle);
+  SetEditNumbers(DBeTpImp.Handle);
+end;
+
+procedure TFChaveNfe.DBeTpImpExit(Sender: TObject);
+begin
+  CDSDadosTPIMP.AsString := FormatFloat('0', CDSDadosTPIMP.AsFloat);
 end;
 
 end.
